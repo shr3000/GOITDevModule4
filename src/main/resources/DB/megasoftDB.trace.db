@@ -1,0 +1,44 @@
+2023-04-11 19:56:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Scalar subquery contains more than one row; SQL statement:
+INSERT INTO project (client_id, start_date, finish_date) VALUES       (SELECT id FROM client WHERE name = 'EPAM', '2022-01-05', '2022-06-25'),       (SELECT id FROM client WHERE name = 'EPAM', '2022-01-10', '2023-02-25'),       (SELECT id FROM client WHERE name = 'UDEMY', '2023-02-03', '2023-03-31'),       (SELECT id FROM client WHERE name = 'UDEMY', '2020-11-10', '2023-02-28'),       (SELECT id FROM client WHERE name = 'UDEMY', '2020-11-12', '2022-01-20'),       (SELECT id FROM client WHERE name = 'TESTIO', '2021-10-10', '2023-01-31'),       (SELECT id FROM client WHERE name = 'TESTIO', '2022-11-11', '2023-10-10'),       (SELECT id FROM client WHERE name = 'TESTIO', '2023-02-10', '2023-10-02'),       (SELECT id FROM client WHERE name = 'TESTIO', '2020-01-10', '2022-11-10'),       (SELECT id FROM client WHERE name = 'CIKLUM', '2020-07-20', '2021-02-10'),       (SELECT id FROM client WHERE name = 'GOOGLE', '2022-04-11', '2023-05-20') -- ((SELECT
+    ID
+FROM PUBLIC.CLIENT
+WHERE NAME = 'EPAM'), '2022-01-05', '2022-06-25') [90053-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.expression.Subquery.getValue(Subquery.java:53)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:160)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandList.executeRemaining(CommandList.java:49)
+	at org.h2.command.CommandList.update(CommandList.java:66)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at dbService.DatabasePopulateService.main(DatabasePopulateService.java:12)
+2023-04-11 19:57:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Scalar subquery contains more than one row; SQL statement:
+INSERT INTO project (client_id, start_date, finish_date) VALUES       (SELECT id FROM client WHERE name = 'EPAM', '2022-01-05', '2022-06-25'),       (SELECT id FROM client WHERE name = 'EPAM', '2022-01-10', '2023-02-25'),       (SELECT id FROM client WHERE name = 'UDEMY', '2023-02-03', '2023-03-31'),       (SELECT id FROM client WHERE name = 'UDEMY', '2020-11-10', '2023-02-28'),       (SELECT id FROM client WHERE name = 'UDEMY', '2020-11-12', '2022-01-20'),       (SELECT id FROM client WHERE name = 'TESTIO', '2021-10-10', '2023-01-31'),       (SELECT id FROM client WHERE name = 'TESTIO', '2022-11-11', '2023-10-10'),       (SELECT id FROM client WHERE name = 'TESTIO', '2023-02-10', '2023-10-02'),       (SELECT id FROM client WHERE name = 'TESTIO', '2020-01-10', '2022-11-10'),       (SELECT id FROM client WHERE name = 'CIKLUM', '2020-07-20', '2021-02-10'),       (SELECT id FROM client WHERE name = 'GOOGLE', '2022-04-11', '2023-05-20') -- ((SELECT
+    ID
+FROM PUBLIC.CLIENT
+WHERE NAME = 'EPAM'), '2022-01-05', '2022-06-25') [90053-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.expression.Subquery.getValue(Subquery.java:53)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:160)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandList.executeRemaining(CommandList.java:49)
+	at org.h2.command.CommandList.update(CommandList.java:66)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at dbService.DatabasePopulateService.main(DatabasePopulateService.java:12)
+2023-04-11 21:39:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "TESTIO" [22018-214]
