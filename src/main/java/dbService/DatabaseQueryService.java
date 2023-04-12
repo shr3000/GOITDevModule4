@@ -76,6 +76,18 @@ public class DatabaseQueryService {
 
     public List<ProjectPrice> printProjectPrices(){
         List<ProjectPrice> projectPrices = new ArrayList<>();
+        ResultSet result = null;
+        try {
+            result = getQueryResult("./src/main/java/sql/print_project_prices.sql");
+            while (result.next()) {
+                ProjectPrice price = new ProjectPrice();
+                price.setNane(result.getString("name"));
+                price.setPrice(result.getDouble("price"));
+                projectPrices.add(price);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return projectPrices;
     }
 

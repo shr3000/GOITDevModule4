@@ -22,9 +22,9 @@ public class ProjectPrice {
 
     @Override
     public String toString() {
-        return "ProjectPrice{" +
-                "nane='" + nane + '\'' +
-                ", price=" + price +
+        return "ProjectPrice {" +
+                "nane = '" + nane + '\'' +
+                ", price = " + price +
                 '}';
     }
 }

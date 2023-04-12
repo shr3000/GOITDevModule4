@@ -1,14 +1,18 @@
-import dbConverter.LongestProject;
-import dbConverter.MaxProjectCountClient;
-import dbConverter.MaxSalaryWorker;
-import dbConverter.OldestYoungestWorkers;
+import dbConverter.*;
+import dbService.DatabaseInitService;
 import dbService.DatabaseQueryService;
+import dbService.ReaderQuery;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class DBQueryServiceTest {
+
+    @Test
+    void readerQueryTest() {
+        System.out.println(ReaderQuery.readQueryFromFile("./src/main/java/sql/init_db.sql"));
+    }
     @Test
     void findMaxProjectsClient() throws SQLException {
         List<MaxProjectCountClient> maxProjectCountClients = new DatabaseQueryService().findMaxProjectsClient();
@@ -31,5 +35,11 @@ public class DBQueryServiceTest {
     void findOldestYoungestWorkerTest() throws SQLException {
         List<OldestYoungestWorkers> workers = new DatabaseQueryService().findYoungestOldestWorkers();
         System.out.println(workers);
+    }
+
+    @Test
+    void printProjectPriceTest() throws SQLException {
+        List<ProjectPrice> prices = new DatabaseQueryService().printProjectPrices();
+        System.out.println(prices);
     }
 }
