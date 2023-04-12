@@ -1,6 +1,6 @@
 package dbService;
 
-import dbConverter.MaxProjectCountClient;
+import dbConverter.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,15 +22,71 @@ public class DatabaseQueryService {
         return maxProjectCountClients;
     }
 
-    public ResultSet getQueryResult(String path) {
-        ResultSet resultSet;
-        Connection connection = Database.getInstance().getConnection();
-        try(Statement statement = connection.createStatement();) {
-            String maxProjectCountQueryStr = ReaderQuery.readQueryFromFile(path);
-            resultSet = statement.executeQuery(maxProjectCountQueryStr);
+    public List<LongestProject> findLongestProjec() {
+        List<LongestProject> longestProjects = new ArrayList<>();
+        ResultSet resultSet = null;
+        try {
+            resultSet = getQueryResult("./src/main/java/sql/find_longest_project.sql");
+            while (resultSet.next()){
+                LongestProject project = new LongestProject();
+                project.setMonthCount(resultSet.getInt("month_count"));
+                project.setName(resultSet.getString("name"));
+                longestProjects.add(project);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return longestProjects;
+    }
+
+    public List<MaxSalaryWorker> findMaxSalaryWorker() {
+        List<MaxSalaryWorker> workers = new ArrayList<>();
+        ResultSet resultSet = null;
+        try {
+            resultSet = getQueryResult("./src/main/java/sql/find_max_salary_worker.sql");
+            while (resultSet.next()) {
+                MaxSalaryWorker worker = new MaxSalaryWorker();
+                worker.setName(resultSet.getString("name"));
+                worker.setSalary(resultSet.getDouble("salary"));
+                workers.add(worker);
+            }
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return workers;
+    }
+
+    public List<OldestYoungestWorkers> findYoungestOldestWorkers(){
+        List<OldestYoungestWorkers> workers = new ArrayList<>();
+        ResultSet resultSet = null;
+        try {
+            resultSet = getQueryResult("./src/main/java/sql/find_youngest_eldest_workers.sql");
+            while (resultSet.next()) {
+                OldestYoungestWorkers worker = new OldestYoungestWorkers();
+                worker.setName(resultSet.getString("name"));
+                worker.setType(resultSet.getString("type"));
+                worker.setBirtday(resultSet.getString("birthday"));
+                workers.add(worker);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return workers;
+    }
+
+    public List<ProjectPrice> printProjectPrices(){
+        List<ProjectPrice> projectPrices = new ArrayList<>();
+        return projectPrices;
+    }
+
+    private ResultSet getQueryResult(String path) throws SQLException {
+        ResultSet resultSet;
+        Connection connection = Database.getInstance().getConnection();
+        Statement statement = connection.createStatement();
+            String maxProjectCountQueryStr = ReaderQuery.readQueryFromFile(path);
+            resultSet = statement.executeQuery(maxProjectCountQueryStr);
+
         return resultSet;
     }
+
 }
